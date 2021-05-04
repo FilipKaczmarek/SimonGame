@@ -1,6 +1,8 @@
 const gamePattern = [];
+const userClickedPattern = [];
 const buttonColours = ["red", "blue", "green", "yellow"];
-
+const buttonsNodeArray = document.querySelectorAll('.btn')
+const buttonArray = Array.from(buttonsNodeArray)
 
 const nextSequence = function() {
     const randomNumber = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
@@ -23,8 +25,11 @@ const playSound = function(source){
     audio.play();
 }
 
-nextSequence()
-nextSequence()
-nextSequence()
-nextSequence()
-nextSequence()
+for(let i = 0; i < buttonArray.length; i++){
+    buttonArray[i].addEventListener('click', function(){
+
+            let id = this.id;
+            userClickedPattern.push(id)
+        
+    })
+}
