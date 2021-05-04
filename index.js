@@ -9,12 +9,13 @@ const nextSequence = function() {
     let randomChosenColour = buttonColours[randomNumber];
     gamePattern.push(randomChosenColour);
 
-    let button = document.querySelector(`.${randomChosenColour}`);
-    button.classList.add('pressed');
+    addAnimation(randomChosenColour);
+    // let button = document.querySelector(`.${randomChosenColour}`);
+    // button.classList.add('pressed');
 
-    setTimeout(() => {
-        button.classList.remove('pressed');
-    }, 20 * 10);
+    // setTimeout(() => {
+    //     button.classList.remove('pressed');
+    // }, 20 * 10);
     
     // Create sound
     playSound(randomChosenColour);
@@ -25,11 +26,22 @@ const playSound = function(source){
     audio.play();
 }
 
+const addAnimation = function(src){
+    let button = document.querySelector(`.${src}`);
+    button.classList.add('pressed');
+
+    setTimeout(() => {
+        button.classList.remove('pressed');
+    }, 15 * 10);
+}
+
 for(let i = 0; i < buttonArray.length; i++){
     buttonArray[i].addEventListener('click', function(){
 
             let id = this.id;
             userClickedPattern.push(id)
         
+            addAnimation(id)
+            playSound(id);
     })
 }
