@@ -1,8 +1,23 @@
 const gamePattern = [];
 const userClickedPattern = [];
 const buttonColours = ["red", "blue", "green", "yellow"];
-const buttonsNodeArray = document.querySelectorAll('.btn')
-const buttonArray = Array.from(buttonsNodeArray)
+const buttonsNodeArray = document.querySelectorAll('.btn');
+const buttonArray = Array.from(buttonsNodeArray);
+const title = document.getElementById('level-title');
+
+const GAME_STATE = {
+    level: 0,
+    isStarted: false
+}
+
+document.addEventListener('keydown', function(event){
+    if(event.key === 'a' && GAME_STATE.isStarted == false){
+        title.innerHTML = `Level ${GAME_STATE.level}`
+        
+        nextSequence()
+        GAME_STATE.isStarted = true;
+    }
+})
 
 const nextSequence = function() {
     const randomNumber = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
