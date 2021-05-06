@@ -3,7 +3,7 @@ let userClickedPattern = [];
 const buttonColours = ["red", "blue", "green", "yellow"];
 const buttonsNodeArray = document.querySelectorAll('.btn');
 const buttonArray = Array.from(buttonsNodeArray);
-const title = document.getElementById('level-title');
+const title = document.querySelector('#level-title');
 
 const GAME_STATE = {
     level: 0,
@@ -21,8 +21,6 @@ document.addEventListener('keydown', function (event) {
 
 const nextSequence = function () {
     userClickedPattern = [];
-
-    title.innerHTML = `Level ${GAME_STATE.level + 1}`;
 
     const randomNumber = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
     let randomChosenColour = buttonColours[randomNumber];
@@ -49,6 +47,7 @@ const addAnimation = function (src) {
 const checkAnswer = function (currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         console.log("success")
+        title.innerHTML = `Level ${GAME_STATE.level + gamePattern.length}`
 
         if (userClickedPattern.length === gamePattern.length) {
             setTimeout(() => {
@@ -56,7 +55,14 @@ const checkAnswer = function (currentLevel) {
             }, 80 * 10)
         }
     } else {
-        console.log("something went wrong")
+        playSound("wrong")
+        document.body.classList.add("game-over");
+
+        setTimeout( () => {
+            document.body.classList.remove("game-over");
+        }, 20 * 10)
+
+        title.innerHTML = `Game Over, Press "A" Key to Restart`
     }
 }
 
