@@ -63,7 +63,16 @@ const checkAnswer = function (currentLevel) {
         }, 20 * 10)
 
         title.innerHTML = `Game Over, Press "A" Key to Restart`
+
+        startOver()
     }
+}
+
+const startOver = function(){
+    GAME_STATE.isStarted = false;
+    GAME_STATE.level = 0;
+
+    gamePattern = [];
 }
 
 for (let i = 0; i < buttonArray.length; i++) {
